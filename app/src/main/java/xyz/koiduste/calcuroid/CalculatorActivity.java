@@ -1,39 +1,65 @@
 package xyz.koiduste.calcuroid;
 
+import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import xyz.koiduste.calcuroid.databinding.ActivityCalculatorBinding;
+import org.parceler.Parcels; //http://parceler.org/ - Helps me Parcel stuff.
+
+import xyz.koiduste.calcuroid.databinding.LayoutLandBinding;
+import xyz.koiduste.calcuroid.databinding.LayoutPortBinding;
 
 public class CalculatorActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mCalcInputDisplay;
     private TextView mCalcOutputDisplay;
     private CalculatorService mCalcService;
-    private ActivityCalculatorBinding binding;
-
+    private LayoutLandBinding landBinding;
+    private LayoutPortBinding portBinding;
+    private DataBindingUtil binding;
     private final static String DIGITS = "0123456789.";
     private final static String OPERATORS = "+-*/";
+    private final static String SERVICE = "SERVICE";
+    private final static String INPUT = "INPUT";
+    private final static String OUTPUT = "OUTPUT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_calculator);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_calculator);
+        //setContentView(R.layout_port.activity_calculator);
 
+        if (savedInstanceState == null) {
+            mCalcService = new CalculatorServiceImpl();
+        } else {
+            mCalcService = Parcels.unwrap(savedInstanceState.getParcelable(SERVICE));
+        }
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        //    setContentView(R.layout.layout_port);
+            portBinding = DataBindingUtil.setContentView(this, R.layout.layout_port);
+            portBinding.setCalcService((CalculatorServiceImpl)mCalcService);
+            mCalcInputDisplay = portBinding.textInput;
+            mCalcOutputDisplay = portBinding.textOutput;
+        } else {
+        //    setContentView(R.layout.layout_land);
+            landBinding = DataBindingUtil.setContentView(this, R.layout.layout_land);
+            landBinding.setCalcService((CalculatorServiceImpl) mCalcService);
+            mCalcInputDisplay = landBinding.textInput;
+            mCalcOutputDisplay = landBinding.textOutput;
+        }
+
+        //binding = DataBindingUtil.setContentView(this, R.layout.activity_calculator);
 
         //Service & Display
-        mCalcService = new CalculatorServiceImpl();
-        binding.setCalcService((CalculatorServiceImpl) mCalcService);
-        mCalcInputDisplay = binding.textInput;
-        mCalcOutputDisplay = binding.textOutput;
-       // mCalcInputDisplay = (TextView) findViewById(R.id.textInput);
+        //mCalcService = new CalculatorServiceImpl();
+        //binding.setCalcService((CalculatorServiceImpl) mCalcService);
+        //mCalcInputDisplay = binding.textInput;
+        //mCalcOutputDisplay = binding.textOutput;
+        //mCalcInputDisplay = (TextView) findViewById(R.id.textInput);
         //mCalcOutputDisplay = (TextView) findViewById(R.id.textOutput);
 
         //Buttons
@@ -61,12 +87,19 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         String key = ((Button) v).getText().toString();
+        //TODO! all key action logic to service
         if (DIGITS.contains(key)) {
-            binding.getCalcService().operandText.set(mCalcInputDisplay.getText()+key);
+            mCalcService.digitAction(key);
             if (key.equals(".")) ((Button)findViewById(R.id.buttonComma)).setEnabled(false);
         } else {
             mCalcService.opAction(key);
             ((Button)findViewById(R.id.buttonComma)).setEnabled(true); //TODO Replace with boolean property, if possible
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(SERVICE, Parcels.wrap(mCalcService));
     }
 }

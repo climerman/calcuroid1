@@ -3,10 +3,13 @@ package xyz.koiduste.calcuroid;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 
+import org.parceler.Parcel;
+
 
 /**
  * Created by marko on 3/10/16.
  */
+@Parcel
 public class CalculatorServiceImpl extends MathServiceImpl implements CalculatorService {
 
     private final static String ADD = "+";
@@ -105,5 +108,10 @@ public class CalculatorServiceImpl extends MathServiceImpl implements Calculator
                 waitingOperator = key;
                 break;
         }
+    }
+
+    @Override
+    public void digitAction(String key) {
+        operandText.set(operandText.get()+key);
     }
 }

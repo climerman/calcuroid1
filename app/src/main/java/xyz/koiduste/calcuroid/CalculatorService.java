@@ -9,4 +9,5 @@ public interface CalculatorService {
     double getResult();
     void calcOperation(String waitingOperator);
     void opAction(String key);
+    void digitAction(String key);
 }
