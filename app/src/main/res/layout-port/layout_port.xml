@@ -197,7 +197,7 @@
             android:layout_height="wrap_content"
             android:text="@string/ButtonComma"
             android:id="@+id/buttonComma"
-            android:enabled="true"
+            android:enabled="@{CalcService.commaEnabled}"
             android:layout_weight="1"
             style="@style/button_number"/>
 

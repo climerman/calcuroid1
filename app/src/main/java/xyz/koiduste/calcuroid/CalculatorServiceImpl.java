@@ -86,6 +86,7 @@ public class CalculatorServiceImpl extends MathServiceImpl implements Calculator
 
     @Override
     public void opAction(String key) {
+        commaEnabled.set(true);
         switch (key) {
             case EQUALS:
                 calcOperation(waitingOperator);
@@ -113,5 +114,10 @@ public class CalculatorServiceImpl extends MathServiceImpl implements Calculator
     @Override
     public void digitAction(String key) {
         operandText.set(operandText.get()+key);
+        if (key.equals(".")) {
+            commaEnabled.set(false);
+        }
     }
+
+
 }

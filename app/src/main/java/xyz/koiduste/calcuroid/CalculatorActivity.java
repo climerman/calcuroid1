@@ -90,10 +90,10 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         //TODO! all key action logic to service
         if (DIGITS.contains(key)) {
             mCalcService.digitAction(key);
-            if (key.equals(".")) ((Button)findViewById(R.id.buttonComma)).setEnabled(false);
+            //if (key.equals(".")) ((Button)findViewById(R.id.buttonComma)).setEnabled(false);
         } else {
             mCalcService.opAction(key);
-            ((Button)findViewById(R.id.buttonComma)).setEnabled(true); //TODO Replace with boolean property, if possible
+            //((Button)findViewById(R.id.buttonComma)).setEnabled(true);
         }
     }
 
