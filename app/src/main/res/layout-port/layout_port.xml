@@ -39,28 +39,32 @@
             android:layout_height="wrap_content"
             android:text="@string/ButtonClear"
             android:id="@+id/buttonClear"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_action"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/ButtonDelete"
             android:id="@+id/buttonDelete"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_action"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/ButtonBrackets"
             android:id="@+id/buttonBrackets"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_action"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/ButtonAdd"
             android:id="@+id/buttonAdd"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_action"/>
     </LinearLayout>
 
     <LinearLayout
@@ -74,28 +78,32 @@
             android:layout_height="wrap_content"
             android:text="@string/Button1"
             android:id="@+id/button1"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_number"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/Button2"
             android:id="@+id/button2"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_number"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/Button3"
             android:id="@+id/button3"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_number"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/ButtonSubtract"
             android:id="@+id/buttonSubtract"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_action"/>
     </LinearLayout>
 
     <LinearLayout
@@ -109,28 +117,32 @@
             android:layout_height="wrap_content"
             android:text="@string/Button4"
             android:id="@+id/button4"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_number"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/Button5"
             android:id="@+id/button5"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_number"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/Button6"
             android:id="@+id/button6"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_number"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/ButtonMultiply"
             android:id="@+id/buttonMultiply"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_action"/>
     </LinearLayout>
 
     <LinearLayout
@@ -144,28 +156,32 @@
             android:layout_height="wrap_content"
             android:text="@string/Button7"
             android:id="@+id/button7"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_number"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/Button8"
             android:id="@+id/button8"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_number"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/Button9"
             android:id="@+id/button9"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_number"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/ButtonDivide"
             android:id="@+id/buttonDivide"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_action"/>
 
     </LinearLayout>
 
@@ -182,21 +198,24 @@
             android:text="@string/ButtonComma"
             android:id="@+id/buttonComma"
             android:enabled="true"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_number"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/Button0"
             android:id="@+id/button0"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            style="@style/button_number"/>
 
         <Button
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:text="@string/ButtonEquals"
             android:id="@+id/buttonEquals"
-            android:layout_weight="2"/>
+            android:layout_weight="2"
+            style="@style/button_action"/>
     </LinearLayout>
 
 </LinearLayout>
