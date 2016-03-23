@@ -3,7 +3,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="CalcService" type="xyz.koiduste.calcuroid.CalculatorServiceImpl"/>
+        <variable name="CalcService" type="xyz.koiduste.calcuroid1.CalculatorServiceImpl"/>
     </data>
 
 <LinearLayout
@@ -12,7 +12,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context="xyz.koiduste.calcuroid.CalculatorActivity">
+    tools:context="xyz.koiduste.calcuroid1.CalculatorActivity">
 
     <TextView
         android:layout_width="match_parent"

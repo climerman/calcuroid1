@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="CalcService" type="xyz.koiduste.calcuroid.CalculatorServiceImpl"/>
+        <variable name="CalcService" type="xyz.koiduste.calcuroid1.CalculatorServiceImpl"/>
     </data>
 <RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +12,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="xyz.koiduste.calcuroid.CalculatorActivity">
+    tools:context="xyz.koiduste.calcuroid1.CalculatorActivity">
 
 
 

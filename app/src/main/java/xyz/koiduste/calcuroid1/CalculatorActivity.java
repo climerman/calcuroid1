@@ -1,4 +1,4 @@
-package xyz.koiduste.calcuroid;
+package xyz.koiduste.calcuroid1;
 
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import org.parceler.Parcels; //http://parceler.org/ - Helps me Parcel stuff.
 
-import xyz.koiduste.calcuroid.databinding.LayoutLandBinding;
-import xyz.koiduste.calcuroid.databinding.LayoutPortBinding;
+import xyz.koiduste.calcuroid1.databinding.LayoutLandBinding;
+import xyz.koiduste.calcuroid1.databinding.LayoutPortBinding;
 
 public class CalculatorActivity extends AppCompatActivity implements View.OnClickListener {
 
