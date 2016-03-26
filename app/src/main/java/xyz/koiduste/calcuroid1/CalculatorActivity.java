@@ -1,5 +1,6 @@
 package xyz.koiduste.calcuroid1;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
@@ -17,50 +18,36 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
 
     private TextView mCalcInputDisplay;
     private TextView mCalcOutputDisplay;
-    private CalculatorService mCalcService;
+    private CalcuroidUIEngine mUIEngine;
     private LayoutLandBinding landBinding;
     private LayoutPortBinding portBinding;
-    private DataBindingUtil binding;
-    private final static String DIGITS = "0123456789.";
-    private final static String OPERATORS = "+-*/";
-    private final static String SERVICE = "SERVICE";
-    private final static String INPUT = "INPUT";
-    private final static String OUTPUT = "OUTPUT";
+
+    private static final String SERVICE = "SERVICE";
+    private static final String OPERAND = "OPERAND";
+    private static final String RESULT = "RESULT";
+    private static final String OPERATOR = "OPERATOR";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout_port.activity_calculator);
 
         if (savedInstanceState == null) {
-            mCalcService = new CalculatorServiceImpl();
+            mUIEngine = new CalcuroidUIEngine();
         } else {
-            mCalcService = Parcels.unwrap(savedInstanceState.getParcelable(SERVICE));
+            mUIEngine = Parcels.unwrap(savedInstanceState.getParcelable(SERVICE));
         }
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-        //    setContentView(R.layout.layout_port);
             portBinding = DataBindingUtil.setContentView(this, R.layout.layout_port);
-            portBinding.setCalcService((CalculatorServiceImpl)mCalcService);
+            portBinding.setUIEngine((CalcuroidUIEngine)mUIEngine);
             mCalcInputDisplay = portBinding.textInput;
             mCalcOutputDisplay = portBinding.textOutput;
         } else {
-        //    setContentView(R.layout.layout_land);
             landBinding = DataBindingUtil.setContentView(this, R.layout.layout_land);
-            landBinding.setCalcService((CalculatorServiceImpl) mCalcService);
+            landBinding.setUIEngine((CalcuroidUIEngine)mUIEngine);
             mCalcInputDisplay = landBinding.textInput;
             mCalcOutputDisplay = landBinding.textOutput;
         }
-
-        //binding = DataBindingUtil.setContentView(this, R.layout.activity_calculator);
-
-        //Service & Display
-        //mCalcService = new CalculatorServiceImpl();
-        //binding.setCalcService((CalculatorServiceImpl) mCalcService);
-        //mCalcInputDisplay = binding.textInput;
-        //mCalcOutputDisplay = binding.textOutput;
-        //mCalcInputDisplay = (TextView) findViewById(R.id.textInput);
-        //mCalcOutputDisplay = (TextView) findViewById(R.id.textOutput);
 
         //Buttons
         findViewById(R.id.button0).setOnClickListener(this);
@@ -82,24 +69,27 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.buttonDelete).setOnClickListener(this);
         findViewById(R.id.buttonBrackets).setOnClickListener(this);
         findViewById(R.id.buttonComma).setOnClickListener(this);
-    }
+    } //onCreate
 
     @Override
     public void onClick(View v) {
         String key = ((Button) v).getText().toString();
-        //TODO! all key action logic to service
-        if (DIGITS.contains(key)) {
-            mCalcService.digitAction(key);
-            //if (key.equals(".")) ((Button)findViewById(R.id.buttonComma)).setEnabled(false);
-        } else {
-            mCalcService.opAction(key);
-            //((Button)findViewById(R.id.buttonComma)).setEnabled(true);
-        }
+        mUIEngine.readInput(key);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(SERVICE, Parcels.wrap(mCalcService));
+        outState.putParcelable(SERVICE, Parcels.wrap(mUIEngine));
+    }
+
+    public void broadcastIntent(View view) {
+        Intent intent = new Intent();
+        intent.setAction("xyz.koiduste.CALCULATE");
+        intent.putExtra(RESULT, mCalcOutputDisplay.getText());
+        intent.putExtra(OPERAND, mCalcInputDisplay.getText());
+        intent.putExtra(OPERATOR, mUIEngine.waitingOperator);
+        intent.setType("text/plain");
+        sendBroadcast(intent);
     }
 }

@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="CalcService" type="xyz.koiduste.calcuroid1.CalculatorServiceImpl"/>
+        <variable name="UIEngine" type="xyz.koiduste.calcuroid1.CalcuroidUIEngine"/>
     </data>
 <RelativeLayout
     xmlns:tools="http://schemas.android.com/tools"
