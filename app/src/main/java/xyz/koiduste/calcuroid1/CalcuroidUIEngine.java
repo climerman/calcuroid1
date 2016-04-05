@@ -1,11 +1,19 @@
 package xyz.koiduste.calcuroid1;
 
+import android.app.Activity;
+import android.app.usage.UsageEvents;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import org.parceler.Parcel;
+
+import java.util.EventObject;
 
 /**
  * Created by marko on 3/26/16.
@@ -24,6 +32,10 @@ public class CalcuroidUIEngine implements UIEngine {
     private final static String BRACKETS ="( )";
     private final static String DELETE = "<-";
 
+    private final String OPERAND = "OPERAND";
+    private final String RESULT = "RESULT";
+    private final String OPERATOR = "OPERATOR";
+
     public final ObservableField<String> operandText = new ObservableField<String>("");
     public final ObservableField<String> resultText = new ObservableField<String>("");
     public final ObservableBoolean commaEnabled = new ObservableBoolean(true);
@@ -34,10 +46,8 @@ public class CalcuroidUIEngine implements UIEngine {
     public void readInput(String key) {
         if (DIGITS.contains(key)) {
             digitAction(key);
-        } else if (OPERATORS.contains(key)) {
-            opAction(key);
         } else {
-            throw new RuntimeException("Faulty input");
+            opAction(key);
         }
     }
 
@@ -74,6 +84,7 @@ public class CalcuroidUIEngine implements UIEngine {
                 operandText.set("");
                 break;
             case BRACKETS:
+                //TODO Not yet implemented.
                 break;
             case "":
                 if (!operandText.get().isEmpty()) {

@@ -1,5 +1,8 @@
 package xyz.koiduste.calcuroid1;
 
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
@@ -26,6 +29,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     private static final String OPERAND = "OPERAND";
     private static final String RESULT = "RESULT";
     private static final String OPERATOR = "OPERATOR";
+    private final static String OPERATORS = "+-*/=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,9 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         String key = ((Button) v).getText().toString();
+        if (OPERATORS.contains(key)) {
+            broadcastIntent(v);
+        }
         mUIEngine.readInput(key);
     }
 
@@ -86,10 +93,15 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     public void broadcastIntent(View view) {
         Intent intent = new Intent();
         intent.setAction("xyz.koiduste.CALCULATE");
-        intent.putExtra(RESULT, mCalcOutputDisplay.getText());
-        intent.putExtra(OPERAND, mCalcInputDisplay.getText());
+        intent.putExtra(RESULT, mUIEngine.resultText.get());
+        intent.putExtra(OPERAND, mUIEngine.operandText.get());
         intent.putExtra(OPERATOR, mUIEngine.waitingOperator);
-        intent.setType("text/plain");
-        sendBroadcast(intent);
+        //intent.setType("text/plain");
+        sendOrderedBroadcast(intent, null, new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                mUIEngine.resultText.set(getResultData());
+            }
+        }, null, Activity.RESULT_OK, null ,null);
     }
 }
